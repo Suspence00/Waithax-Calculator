@@ -1,0 +1,43 @@
+'use strict';
+var calc = function(hex1,hex2,time){
+  
+  // Starting Hex Value
+  var startingHex = "01010101"
+  var currentIt;
+  
+  // Could be useful,not sure what "count" is though.
+  // Possibly the total count of iterations done?
+  // var totalCount = "ffff0100";
+  // var countDec = parseInt(totalCount,16);
+  
+  //Converts Hex to Dec
+  var num1 = parseInt(hex1,16);
+  var num2 = parseInt(hex2,16);
+  var startDec = parseInt(startingHex,16);
+  
+  //Forumla could be on one line, but fuck it
+  //Divides first hex by drop rate, multiplies by secondsPerIteration (time)
+  
+  if (startDec != num1){
+    currentIt = (startDec - num1)/num2;
+  }
+  
+  else {
+    currentIt = num1/num2;
+  }
+  var c = (currentIt*time)/60;
+  return c;
+  
+  
+};
+// Converting text to Date Object
+var decimalTimeString = calc(inputs.hex1, inputs.hex2, inputs.time).toString();
+var n = new Date(0,0);
+n.setSeconds(+decimalTimeString * 60);
+    
+return {
+  // t Returns time in Minutes
+  // tr Returns time in HH:MM:SS
+  t : calc(inputs.hex1, inputs.hex2, inputs.time),
+  tr : n.toTimeString().slice(0, 8)
+};
