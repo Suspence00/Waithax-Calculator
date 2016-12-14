@@ -3,7 +3,7 @@ A Calculator to use your current hex value to determine time remaining while usi
 
 Website w/ Calculator: http://waithaxcalc.spencers.website/
 
-**v1.9:**
+**Latest v1.9:**
 * Added percentage completed and time elapsed
 * Further cleaned up code w/ comments
 
