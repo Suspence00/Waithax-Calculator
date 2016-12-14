@@ -10,23 +10,25 @@
 var calc = function(current,hex1,hex2,time){
   
   // Starting default Hex + converts to dec
-  var startHex = "0x1010101";
-  var startDec = parseInt(startHex);
-  
-  //  Converts Hex to Dec
-  var num1 = parseInt(hex1,16);
+  var defaultStartHex = "0x1010101";
+  var defaultStartDec = parseInt(defaultStartHex);
+  var modStartDec = parseInt(hex1,16);
   var drop = parseInt(hex2,16);
   var currentItDec = parseInt(current,16);
+  
+  // Checks for modified starting hex and then returns values
+  if (modStartDec != defaultStartDec){defaultStartDec = modStartDec;
+  return modStartDec/drop*time/60;}
+  else{return currentItDec/drop*time/60;}
+  };
+
      
   /*  Intending to implement for percentage done
       var totalCount = "ffff0100";
       var countDec = parseInt(totalCount,16);
   */
   
-  // Returns Values
-  if (startDec == currentItDec){return num1/drop*time/60;}
-  else{return currentItDec/drop*time/60;}
-  };
+  
   
 // Converting text to Date Object
 var n = new Date(0,0);
