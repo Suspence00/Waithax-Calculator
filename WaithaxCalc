@@ -5,36 +5,67 @@
 ***** Code meant for use in conjunction with http://www.Jscalc.io ******
 ***** Credits to /u/Onoitsu2 and /u/neenach2002 for information ********
 ************************************************************************/
+  
+// Default Starting Hex and Total # of Increments (in Dec)
+var defaultStartDec = 16843009;
+var counts = 4294902016;
+var totalIterations = counts/defaultStartDec;
+  
+// Main Fucntion to convert Hex values and calc time
 
-//Main Fucntion to convert Hex values and calc time
-var calc = function(current,hex1,hex2,time){
-  
-  // Starting default Hex + converts to dec
-  var defaultStartHex = "0x1010101";
-  var defaultStartDec = parseInt(defaultStartHex);
+var calc = function(current,hex1,drop,time){
+
+  //Sets Modified Starting Hex (if entered)
   var modStartDec = parseInt(hex1,16);
-  var drop = parseInt(hex2,16);
   var currentItDec = parseInt(current,16);
-  
+
   // Checks for modified starting hex and then returns values
-  if (modStartDec != defaultStartDec){defaultStartDec = modStartDec;
-  return modStartDec/drop*time/60;}
-  else{return currentItDec/drop*time/60;}
-  };
+  if (modStartDec != defaultStartDec){
+    return defaultStartDec/parseInt(drop,16)*time/60;
+  }
+  else{
+    return currentItDec/parseInt(drop,16)*time/60;
+  }
+};
+
   
-  /*  Intending to implement for percentage
-      var totalCount = "ffff0100";
-      var countDec = parseInt(totalCount,16);
-  */
+  // Calculates Percentage remaining by dividing totalIterations by 
+  // (total number of iterations (counts) divided by the current Hex) 
+    
+var percentageRemaining = function(current){
+  var currentItDec = parseInt(current,16);
+  return 100-totalIterations/(counts/currentItDec)*100;
+};
+
+  // Calculates Time Elapsed 
+  // Note: I'm sure there's a better way to do this
   
-// Converting text to Date Object
+var timeCon = function (fullNum){
+  var split = fullNum.toString().split('.');
+  var sec = 100/split[1]
+  sec = 60/sec;
+  fullNum = split[0]+":"+sec.toString().substring(0,2);
+  return fullNum;
+};
+
+// Function to calculate time elapsed
+var timeElapsed = function(current,hex1,drop,time){
+  var elapsed = counts/defaultStartDec*time/60;
+  elapsed = elapsed - calc(current,hex1,drop,time);
+  return timeCon(elapsed);
+};
+
+
+// Converting text to Date Object for HH:MM:SS
 var n = new Date(0,0);
-var decimalTimeString = calc(inputs.currentHex,inputs.hex1,inputs.hex2,inputs.time).toString();
+var decimalTimeString = calc(inputs.currentHex,inputs.hex1,inputs.drop,inputs.time).toString();
 n.setSeconds(+decimalTimeString * 60);
     
 return {
-  // t Returns time in Minutes
   // tr Returns time in HH:MM:SS
-  t : calc(inputs.currentHex,inputs.hex1,inputs.hex2,inputs.time),
-  tr : n.toTimeString().slice(0, 8)
+  // perc returns percentage done
+  // timeRemaining does exactly what you think it does
+  tr : n.toTimeString().slice(0, 8),
+  perc : percentageRemaining(inputs.currentHex),
+  timeRemaining : timeElapsed(inputs.currentHex,inputs.hex1,inputs.drop,inputs.time)
 };
