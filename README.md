@@ -20,8 +20,10 @@ v1.8:
 v1.5:
 * Fixed issues with time increasing instead of decreasing
 * Commented and edited the Spaghetti code
+
 v1.1:
 * Added default values and commented source code for future implementations
+
 v1: Initial
 
 I programmed a calculator for figuring out how much time is remaining while using Waithax https://3ds.guide/dsiware-downgrade-\(save-injection\). This probably isn't perfect, I'm open to any and all suggestions (I'm a novice coder at best). 
