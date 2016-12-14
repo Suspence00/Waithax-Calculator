@@ -1,7 +1,12 @@
 # Waithax-Calculator
 A Calculator to use your current hex value to determine time remaining while using Waithax
 
-Website w/ Calculator: http://waithaxcalc.spencers.website/
+Website: http://waithaxcalc.spencers.website/
+
+Github: [https://github.com/Suspence00/Waithax-Calculator](https://github.com/Suspence00/Waithax-Calculator)
+
+Jscalc.io Source: [https://jscalc.io/calc/G1dRS9waejau9dcF](https://jscalc.io/calc/G1dRS9waejau9dcF)
+
 
 **Latest v1.9:**
 * Added percentage completed and time elapsed
