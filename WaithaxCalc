@@ -21,14 +21,11 @@ var calc = function(current,hex1,hex2,time){
   return modStartDec/drop*time/60;}
   else{return currentItDec/drop*time/60;}
   };
-
-     
-  /*  Intending to implement for percentage done
+  
+  /*  Intending to implement for percentage
       var totalCount = "ffff0100";
       var countDec = parseInt(totalCount,16);
   */
-  
-  
   
 // Converting text to Date Object
 var n = new Date(0,0);
