@@ -9,8 +9,11 @@ Jscalc.io Source: [https://jscalc.io/calc/G1dRS9waejau9dcF](https://jscalc.io/ca
 
 
 **Latest v1.9:**
-* Added percentage completed and time elapsed
-* Further cleaned up code w/ comments
+*  Should be completely working now, you only need to enter your current hex into the first input box and it will automatically calculate (praying_emoji.png)
+
+* Added "Percentage Complete" and "Time Elapsed" outputs in addition to "Time Remaining (HH:MM:SS)"
+
+* 0x1010101 is set as the default starting hex, 0x10000 is the default drop rate and 16 Seconds is the default time. This seems to be standard for all 2ds/o3ds/n3ds but is still modifiable to experimental purposes.
 
 v1.85:
 * Starting Hex and Drop rate are now modifiable (though, not recommend except for experimental purposes as the default values are the same across all 3ds devices surveyed so far
