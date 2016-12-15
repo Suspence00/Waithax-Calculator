@@ -1,10 +1,10 @@
 'use strict';
-/***********************************************************************
-********* Created by Spencer aka /u/BakaDango **************************
-********* Webstie: http://waithaxcalc.spencers.website/ ****************
-***** Code meant for use in conjunction with http://www.Jscalc.io ******
-***** Credits to /u/Onoitsu2 and /u/neenach2002 for information ********
-************************************************************************/
+/****************************************************************************
+********* Created by Spencer aka /u/BakaDango v1.95**************************
+********* Webstie: http://waithaxcalc.spencers.website/ *********************
+***** Code meant for use in conjunction with http://www.Jscalc.io ***********
+***** Credits to /u/Onoitsu2 and /u/neenach2002 for information *************
+*****************************************************************************/
   
   /** The default starting Hex is: 0x1010101
       The total number of defaultCounts is: 00ff0101 
