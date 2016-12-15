@@ -5,67 +5,47 @@
 ***** Code meant for use in conjunction with http://www.Jscalc.io ******
 ***** Credits to /u/Onoitsu2 and /u/neenach2002 for information ********
 ************************************************************************/
-  
-// Default Starting Hex and Total # of Increments (in Dec)
-var defaultStartDec = 16843009;
-var counts = 4294902016;
-var totalIterations = counts/defaultStartDec;
-  
-// Main Fucntion to convert Hex values and calc time
-
-var calc = function(current,hex1,drop,time){
-
-  //Sets Modified Starting Hex (if entered)
-  var modStartDec = parseInt(hex1,16);
-  var currentItDec = parseInt(current,16);
-
-  // Checks for modified starting hex and then returns values
-  if (modStartDec != defaultStartDec){
-    return defaultStartDec/parseInt(drop,16)*time/60;
-  }
-  else{
-    return currentItDec/parseInt(drop,16)*time/60;
-  }
-};
-
-  
-  // Calculates Percentage remaining by dividing totalIterations by 
-  // (total number of iterations (counts) divided by the current Hex) 
+  /** The default starting Hex is: 0x1010101
+      The total number of defaultCounts is: 00ff0101 
+      Iteration Hexes that can be used for testing 
+      (in order start->finish):
+      ffff0100
+      00bf0000
+      00c00000
     
-var percentageRemaining = function(current){
-  var currentItDec = parseInt(current,16);
-  return 100-totalIterations/(counts/currentItDec)*100;
-};
-
-  // Calculates Time Elapsed 
-  // Note: I'm sure there's a better way to do this
-  
-var timeCon = function (fullNum){
-  var split = fullNum.toString().split('.');
-  var sec = 100/split[1]
-  sec = 60/sec;
-  fullNum = split[0]+":"+sec.toString().substring(0,2);
-  return fullNum;
-};
-
-// Function to calculate time elapsed
-var timeElapsed = function(current,hex1,drop,time){
-  var elapsed = counts/defaultStartDec*time/60;
-  elapsed = elapsed - calc(current,hex1,drop,time);
-  return timeCon(elapsed);
-};
-
-
-// Converting text to Date Object for HH:MM:SS
+    **/
+    
+// Sets default Value and form Date variables for converting to time
+var defaultStartDec = parseInt('0x1010101',16);
+var defaultCounts = parseInt('0x00ff0101',16);
+var totalIterations = defaultCounts/defaultStartDec;
+var defaultDrop = parseInt('0x100000',16);
+var defaultTime = 16;
 var n = new Date(0,0);
-var decimalTimeString = calc(inputs.currentHex,inputs.hex1,inputs.drop,inputs.time).toString();
-n.setSeconds(+decimalTimeString * 60);
+var n1 = new Date(0,0);
+
+// Main Fucntion to convert Hex values and calc time
+var calc = function(current,hex1,drop,time){
+    return (defaultCounts - parseInt(current,16))/parseInt(drop,16)*time/60;
+};
+
+  // Calculates Percentage remaining by dividing totalIterations by 
+  // (total number of iterations (defaultCounts) divided by the current Hex) 
+var percentageComplete = function(current){
+  return totalIterations/(defaultCounts/parseInt(current,16))*100;
+  }
+
+// Converting decimals to date objects so they can be displayed HH:MM:SS
+var timeEl = calc(inputs.currentHex,inputs.hex1,inputs.drop,inputs.time);
+var timeRemaining = timeEl - calc(defaultStartDec,defaultCounts,defaultDrop,defaultTime) ;
+n.setSeconds(+timeEl * 60);
+n1.setSeconds(+timeRemaining * 60);
     
 return {
   // tr Returns time in HH:MM:SS
   // perc returns percentage done
   // timeRemaining does exactly what you think it does
-  tr : n.toTimeString().slice(0, 8),
-  perc : percentageRemaining(inputs.currentHex),
-  timeRemaining : timeElapsed(inputs.currentHex,inputs.hex1,inputs.drop,inputs.time)
+  perc : percentageComplete(inputs.currentHex),
+  timeEl : n.toTimeString().slice(0, 8),
+  tr : n1.toTimeString().slice(0, 8),
 };
