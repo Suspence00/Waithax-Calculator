@@ -9,10 +9,14 @@ Jscalc.io Source: [https://jscalc.io/calc/G1dRS9waejau9dcF](https://jscalc.io/ca
 
 
 **Latest v1.95:**
-*Fixed bugs in time display (Thanks /u/Neechnach2002) and made the code far more stable
-*Added testing values in the source code
-*Cleaned up a majority of the code, scrapping a bunch of it for easier implementation
-*Minor text fixes
+
+* Fixed bugs in time display (Thanks /u/Neechnach2002) and made the code far more stable
+
+* Added testing values in the source code
+
+* Cleaned up a majority of the code, scrapping a bunch of it for easier implementation
+
+* Minor text fixes
 
 v1.9
 *  Should be completely working now, you only need to enter your current hex into the first input box and it will automatically calculate (praying_emoji.png)
