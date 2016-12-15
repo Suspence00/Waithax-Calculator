@@ -1,0 +1,63 @@
+'use strict';
+/***********************************************************************
+********* Created by Spencer aka /u/BakaDango **************************
+********* Webstie: http://waithaxcalc.spencers.website/ ****************
+***** Code meant for use in conjunction with http://www.Jscalc.io ******
+***** Credits to /u/Onoitsu2 and /u/neenach2002 for information ********
+************************************************************************/
+  /** The default starting Hex is: 0x1010101
+      The total number of defaultCounts is: 00ff0101 
+
+      Iteration Hexes that can be used for testing 
+      (in order start->finish):
+      ffff0100
+      00bf0000
+      00c00000
+    
+    **/
+  
+// Default Starting Hex and Total # of Increments (in Dec)
+var defaultStartDec = parseInt('0x1010101',16);
+var defaultCounts = parseInt('0x00ff0101',16);
+var totalIterations = defaultCounts/defaultStartDec;
+var defaultDrop = parseInt('0x100000',16);
+var defaultTime = 16;
+
+// Main Fucntion to convert Hex values and calc time
+var calc = function(current,hex1,drop,time){
+
+  //Sets Modified Starting Hex (if entered)
+  var modStartDec = parseInt(hex1,16);
+  var currentItDec = parseInt(current,16);
+
+  // Checks for modified starting hex and then returns values
+  if (modStartDec != defaultStartDec){
+    return defaultStartDec/parseInt(drop,16)*time/60;}
+  else{
+    return currentItDec/parseInt(drop,16)*time/60;}
+};
+
+  
+  // Calculates Percentage remaining by dividing totalIterations by 
+  // (total number of iterations (defaultCounts) divided by the current Hex) 
+    
+var percentageComplete = function(current){
+  return 100-totalIterations/(defaultCounts/parseInt(current,16))*100;
+  }
+
+// Converting decimals to date objects so they can be displayed HH:MM:SS
+var n = new Date(0,0);
+var n1 = new Date(0,0);
+var timeEl = calc(inputs.currentHex,inputs.hex1,inputs.drop,inputs.time);
+var timeRemaining = calc(defaultStartDec,defaultCounts,defaultDrop,defaultTime) - timeEl ;
+n.setSeconds(+timeRemaining * 60);
+n1.setSeconds(+timeEl * 60);
+    
+return {
+  // tr Returns time in HH:MM:SS
+  // perc returns percentage done
+  // timeRemaining does exactly what you think it does
+  perc : percentageComplete(inputs.currentHex),
+  timeEl : n.toTimeString().slice(0, 8),
+  tr : n1.toTimeString().slice(0, 8)
+};
