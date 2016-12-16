@@ -17,38 +17,32 @@
       00c00000
     
     **/
-    
-// Sets default Value and form Date variables for converting to time
-var defaultStartDec = parseInt('0x1010101',16);
-var defaultCounts = parseInt('0x00ff0101',16);
-var totalIterations = defaultCounts/defaultStartDec;
-var defaultDrop = parseInt('0x100000',16);
-var defaultTime = 16;
-var n = new Date(0,0);
-var n1 = new Date(0,0);
 
-// Main Fucntion to convert Hex values and calc time
-var calc = function(current,hex1,drop,time){
-    return (defaultCounts - parseInt(current,16))/parseInt(drop,16)*time/60;
+var startingHex = parseInt('0x1010101', 16);
+
+var calculateIterations = function(hex, drop) {
+  return hex / drop;
 };
 
-  // Calculates Percentage remaining by dividing totalIterations by 
-  // (total number of iterations (defaultCounts) divided by the current Hex) 
-var percentageComplete = function(current){
-  return totalIterations/(defaultCounts/parseInt(current,16))*100;
-  }
+var calculateTime = function(iterations, time) {
+  // Start from Unix Epoch, so we don't have to diff
+  var T = moment.utc('1970-01-01T00:00:00+00:00');
+  return T.add(iterations * time, 'seconds').format('HH:mm:ss');
+}
 
-// Converting decimals to date objects so they can be displayed HH:MM:SS
-var timeEl = calc(inputs.currentHex,inputs.hex1,inputs.drop,inputs.time);
-var timeRemaining = timeEl - calc(defaultStartDec,defaultCounts,defaultDrop,defaultTime) ;
-n.setSeconds(+timeEl * 60);
-n1.setSeconds(+timeRemaining * 60);
-    
+var calculatePercentageComplete = function(iterationsComplete, totalIterations) {
+  return iterationsComplete / totalIterations * 100;
+}
+
+var currentHex = parseInt(inputs.currentHex, 16);
+var drop = parseInt(inputs.drop, 16);
+
+var totalIterations = calculateIterations(startingHex, drop);
+var iterationsLeft = calculateIterations(currentHex, drop);
+var iterationsComplete = totalIterations - iterationsLeft;
+
 return {
-  // tr Returns time in HH:MM:SS
-  // perc returns percentage done
-  // timeRemaining does exactly what you think it does
-  perc : percentageComplete(inputs.currentHex),
-  timeEl : n.toTimeString().slice(0, 8),
-  tr : n1.toTimeString().slice(0, 8),
+  timeElapsed : calculateTime(iterationsComplete, inputs.time),
+  percentageComplete : calculatePercentageComplete(inputs.currentHex),
+  timeRemaining : calculateTime(iterationsLeft, inputs.time)
 };
