@@ -8,7 +8,11 @@ Github: [https://github.com/Suspence00/Waithax-Calculator](https://github.com/Su
 Jscalc.io Source: [https://jscalc.io/calc/G1dRS9waejau9dcF](https://jscalc.io/calc/G1dRS9waejau9dcF)
 
 
-**Latest v1.95:**
+**Latest v1.96**
+
+* Major rewrite of code using moments.js by @sluther
+
+Latest v1.95:
 
 * Fixed bugs in time display (Thanks /u/Neechnach2002) and made the code far more stable
 
